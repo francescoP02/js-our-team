@@ -44,7 +44,9 @@ const team = [
     },
 ];
 
-teamContainer = document.querySelector(`.container`);
+// Aggiungo un eventlistener al bottone, se viene cliccato genera la card con le informazioni all'interno del form
+
+const addButton = document.querySelector('#addMemberButton').addEventListener('click', addMemberFromInput);
 
 // Stampare i nomi di tutti gli elementi del team
 for (let i = 0; i < team.length; i++) {
@@ -56,6 +58,14 @@ for (let i = 0; i < team.length; i++) {
     const peopleRole= peopleInfo.role;
     const peopleImg= peopleInfo.image;
     console.log(peopleInfo);
+    generateCard(peopleInfo, peopleName, peopleRole, peopleImg)
+    
+}
+
+
+// Funzione che genera le card inserendo le informazioni e le immagini all'interno
+function generateCard(peopleInfo, peopleName, peopleRole, peopleImg) {
+
     // Creo il div dentro l'HTML che conterrà le informazioni con l'immagine
     const thisCard = document.createElement("div");
     thisCard.classList.add("team-card");
@@ -64,10 +74,11 @@ for (let i = 0; i < team.length; i++) {
     thisImg.classList.add("card-image");
     // Inserisco l'immagine all'interno del div ms-card
     if (key = "image") {
-        thisImg.innerHTML += (` <div> <img src="img/${peopleInfo[key]}" alt="${peopleName}"></img> </div>`);   
+        thisImg.innerHTML += (` <img src="img/${peopleImg}" alt="${peopleName}"></img>`);   
         (thisCard).appendChild(thisImg);
     }
 
+    // Genero gli elementi in cui verranno inserite le informazioni e li inserisco nella card
     const thisName = document.createElement("h3");
     thisName.innerText = peopleName;
     const thisRole = document.createElement("p");
@@ -80,6 +91,34 @@ for (let i = 0; i < team.length; i++) {
     (thisCard).appendChild(thisText);
 
     document.getElementById("mycontainer").appendChild(thisCard);
-    
+
 }
 
+// funzione che risponde al clic del bottone Add generando la nuova card
+function addMemberFromInput() {
+
+    // creo delle variabili per inserire i valori
+    let thisName = document.querySelector('#name');
+    let thisRole = document.querySelector('#role');
+    let thisImg = document.querySelector('#image');
+  
+    // le inserisco in un oggetto
+    const newMember = {
+      name: thisName.value,
+      role: thisRole.value,
+      image: thisImg.value
+    }
+  
+    // pusho l'oggetto dentro l'array team
+    team.push(newMember);
+
+    // Genero card richiamando la funzione e inserendo come valori quelli ottenuti dagli input
+
+    peopleInfo = newMember;
+    generateCard(peopleInfo, thisName.value, thisRole.value, thisImg.value);
+  
+    // ripulisco i campi del form
+    thisName.value = '';
+    thisRole.value = '';
+    thisImg.value = '';
+};
