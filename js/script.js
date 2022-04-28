@@ -58,14 +58,28 @@ for (let i = 0; i < team.length; i++) {
     console.log(peopleInfo);
     // Creo il div dentro l'HTML che conterrà le informazioni con l'immagine
     const thisCard = document.createElement("div");
-    thisCard.classList.add("ms-card");
-    thisCard.innerHTML = peopleName + "-" + peopleRole;
-    document.getElementById("mycontainer").appendChild(thisCard);
+    thisCard.classList.add("team-card");
 
+    const thisImg = document.createElement("div");
+    thisImg.classList.add("card-image");
     // Inserisco l'immagine all'interno del div ms-card
     if (key = "image") {
-        thisCard.innerHTML += (` <div> <img src="img/${peopleInfo[key]}" alt="${peopleName}"></img> </div>`);   
+        thisImg.innerHTML += (` <div> <img src="img/${peopleInfo[key]}" alt="${peopleName}"></img> </div>`);   
+        (thisCard).appendChild(thisImg);
     }
+
+    const thisName = document.createElement("h3");
+    thisName.innerText = peopleName;
+    const thisRole = document.createElement("p");
+    thisRole.innerText = peopleRole;
+    const thisText = document.createElement("div");
+    thisText.classList.add("card-text");
+
+    (thisText).appendChild(thisName);
+    (thisText).appendChild(thisRole);
+    (thisCard).appendChild(thisText);
+
+    document.getElementById("mycontainer").appendChild(thisCard);
     
 }
 
