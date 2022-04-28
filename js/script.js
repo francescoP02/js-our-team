@@ -48,5 +48,8 @@ const team = [
 for (let i = 0; i < team.length; i++) {
     const peopleInfo = team[i];
     console.log(peopleInfo);
+    newElem = document.createElement("div");
+    newElem.innerHTML = peopleInfo.name + " " + peopleInfo.role + " " + peopleInfo.image;
+    document.getElementById("mycontainer").appendChild(newElem);
 }
 
