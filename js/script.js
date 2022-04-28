@@ -44,12 +44,28 @@ const team = [
     },
 ];
 
-// Stampare i nomi di tutti i studenti
+teamContainer = document.querySelector(`.container`);
+
+// Stampare i nomi di tutti gli elementi del team
 for (let i = 0; i < team.length; i++) {
+
     const peopleInfo = team[i];
+
+    // Prelevo informazioni di ogni singolo elemento
+    const peopleName = peopleInfo.name;
+    const peopleRole= peopleInfo.role;
+    const peopleImg= peopleInfo.image;
     console.log(peopleInfo);
-    newElem = document.createElement("div");
-    newElem.innerHTML = peopleInfo.name + " " + peopleInfo.role + " " + peopleInfo.image;
-    document.getElementById("mycontainer").appendChild(newElem);
+    // Creo il div dentro l'HTML che conterrà le informazioni con l'immagine
+    const thisCard = document.createElement("div");
+    thisCard.classList.add("ms-card");
+    thisCard.innerHTML = peopleName + "-" + peopleRole;
+    document.getElementById("mycontainer").appendChild(thisCard);
+
+    // Inserisco l'immagine all'interno del div ms-card
+    if (key = "image") {
+        thisCard.innerHTML += (` <div> <img src="img/${peopleInfo[key]}" alt="${peopleName}"></img> </div>`);   
+    }
+    
 }
 
